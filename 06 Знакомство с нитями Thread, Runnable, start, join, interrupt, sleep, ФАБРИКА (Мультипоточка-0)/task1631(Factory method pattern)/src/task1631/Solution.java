@@ -27,6 +27,8 @@ import task1631.common.ImageTypes;
 
 public class Solution {
     public static void main(String[] args) {
-        ImageReader reader = ImageReaderFactory.getImageReader(ImageTypes.JPG);
+        ImageReader reader1 = ImageReaderFactory.getImageReader(ImageTypes.JPG);
+        ImageReader reader2 = ImageReaderFactory.getImageReader(ImageTypes.BMP);
+        ImageReader reader3 = ImageReaderFactory.getImageReader(ImageTypes.PNG);
     }
 }

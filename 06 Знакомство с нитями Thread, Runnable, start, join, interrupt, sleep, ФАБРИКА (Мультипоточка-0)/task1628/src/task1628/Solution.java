@@ -56,16 +56,27 @@ public class Solution {
     }
 
     public static class ReaderThread extends Thread {
-        private List<String> result = new ArrayList<String>();
+        private List<String> result = new ArrayList<>();
+
+        public ReaderThread() {
+        }
 
         public void run() {
-            //напишите тут ваш код
-
+            try {
+                while (!Thread.currentThread().isInterrupted()) {
+                    if (reader.ready()) {
+                        result.add(reader.readLine());
+                        readStringCount.incrementAndGet();
+                    }
+                }
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         }
 
-        @Override
-        public String toString() {
-            return result.toString();
-        }
+    @Override
+    public String toString() {
+        return result.toString();
     }
+}
 }

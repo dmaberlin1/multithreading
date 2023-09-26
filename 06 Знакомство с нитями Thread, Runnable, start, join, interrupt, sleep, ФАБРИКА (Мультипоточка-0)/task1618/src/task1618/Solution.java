@@ -16,9 +16,35 @@ Requirements:
 public class Solution {
     public static void main(String[] args) throws InterruptedException {
         //Add your code here - добавь код тут
+        Thread testThread1 = new TestThread();
+        Thread testThread2 = new TestThread();
+        Thread testThread3 = new TestThread();
+
+        testThread1.start();
+        testThread1.join();
+        testThread2.start();
+        testThread2.interrupt();
+
+
     }
 
+
     //Add your code below - добавь код ниже
-    public static class TestThread {
+    public static class TestThread extends Thread {
+        public static int count;
+
+        public TestThread() {
+            count++;
+        }
+
+        @Override
+        public void run() {
+            try {
+                Thread.sleep(1000);
+                System.out.println("run from TestThread " + count);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        }
     }
 }
