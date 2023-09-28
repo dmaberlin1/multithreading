@@ -13,8 +13,10 @@ Requirements:
 5. Переменная int proposal не должна находится в локальном кэше.
 */
 
+//Ключевое слово volatile гарантирует, что переменная будет читаться и записываться напрямую из и в память, минуя локальный кэш потоков.
+
 public class Solution {
-    public static int proposal = 0;
+    public static volatile int  proposal = 0;
 
     public static void main(String[] args) {
         new AcceptProposal().start();

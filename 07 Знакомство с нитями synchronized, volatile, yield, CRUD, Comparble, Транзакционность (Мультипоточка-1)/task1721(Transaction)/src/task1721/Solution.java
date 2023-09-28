@@ -2,8 +2,10 @@ package task1721;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 /* 
@@ -36,10 +38,38 @@ public class Solution {
     public static List<String> allLines = new ArrayList<String>();
     public static List<String> forRemoveLines = new ArrayList<String>();
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws CorruptedDataException {
+        String firstFileName, secondFileName, s;
+        BufferedReader reader;
+
+        try {
+            reader = new BufferedReader(new InputStreamReader(System.in));
+            firstFileName = reader.readLine();
+            secondFileName = reader.readLine();
+
+            reader = new BufferedReader(new FileReader(firstFileName));
+            while ((s = reader.readLine()) != null) {
+                allLines.add(s);
+            }
+            reader = new BufferedReader(new FileReader(secondFileName));
+            while ((s = reader.readLine()) != null) {
+                forRemoveLines.add(s);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        new Solution().joinData();
+
+
     }
 
-    public void joinData() throws CorruptedDataException {
 
+    public void joinData() throws CorruptedDataException {
+        if (new HashSet<>(allLines).containsAll(forRemoveLines)) {
+            allLines.removeAll(forRemoveLines);
+        } else {
+            allLines.clear();
+            throw new CorruptedDataException();
+        }
     }
 }

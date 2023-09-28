@@ -6,7 +6,13 @@ public class OurPresident {
     private OurPresident() {
     }
 
-    public static OurPresident getOurPresident() {
+    static{
+        synchronized (new OurPresident()){
+            president=new OurPresident();
+        }
+    }
+
+    public static  OurPresident getOurPresident() {
         return president;
     }
 }
